@@ -5,12 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.hyeokbeom.domain.model.GoodsListResponse
+import com.hyeokbeom.rxcassignment.ui.anim.DotsFlashing
 import com.hyeokbeom.rxcassignment.ui.theme.RXCAssignmentTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,29 +25,38 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             var goodsList by remember { mutableStateOf(emptyList<GoodsListResponse.Good>()) }
+            var isLoading by remember { mutableStateOf(false) }
 
             /** Main View 상태 관리 **/
             when (val it = viewModel.mainViewState.collectAsState().value) {
+                is MainViewState.IsLoading -> isLoading = true
+                // set goodsList and recomposing
+                is MainViewState.MainList -> goodsList = it.list.also { isLoading = false }
                 is MainViewState.Idle -> { /* TODO */ }
-                is MainViewState.IsLoading -> { /* TODO */ }
                 is MainViewState.Error -> { /* TODO */ }
-                is MainViewState.MainList -> goodsList = it.list    // set goodsList and recomposing
             }
 
             RXCAssignmentTheme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Color.White)
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    /* Top Navigation */
-                    NavigationArea()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = Color.White)
+                    ) {
+                        /* Top Navigation */
+                        NavigationArea()
 
-                    /* Goods List */
-                    GoodsArea(goodsList)
+                        /* Goods List */
+                        GoodsArea(goodsList)
+                    }
+
+                    // Loading Progress
+                    if (isLoading) DotsFlashing()
                 }
             }
         }.also { viewModel.fetchGoodsList() }
     }
 }
-
