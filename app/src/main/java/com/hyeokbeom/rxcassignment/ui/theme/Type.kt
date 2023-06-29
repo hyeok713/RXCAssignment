@@ -20,6 +20,10 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     ),
 )
+
+/*
+ * Typography for Titles
+ */
 val TitleLabel = Typography(
     // Good Title
     displayMedium = TextStyle(
@@ -30,6 +34,10 @@ val TitleLabel = Typography(
         color = Color.Black,
     ),
 )
+
+/*
+ * Typography for Prices
+ */
 val PriceLabel = Typography(
     // Price & Discount Rate
     displayMedium = TextStyle(
