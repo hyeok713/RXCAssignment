@@ -1,12 +1,11 @@
 package com.hyeokbeom.rxcassignment.main
 
 import androidx.lifecycle.ViewModel
-import com.hyeokbeom.domain.model.GoodsListResponse
+import com.hyeokbeom.domain.usecase.GoodLikeUseCase
 import com.hyeokbeom.domain.usecase.GoodsListUseCase
 import com.hyeokbeom.rxcassignment.ext.launchOnIO
 import com.hyeokbeom.shared.executeResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -14,6 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val goodsListUseCase: GoodsListUseCase,
+    private val goodLikeUseCase: GoodLikeUseCase,
 ) : ViewModel(), MainViewIntent {
     val mainViewState = MutableStateFlow<MainViewState>(MainViewState.Idle)
 
@@ -26,8 +26,12 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    override fun requestLikeChange(index: Int) = launchOnIO {
-        // TODO: request like state change to server..
+    override fun requestLikeChange(
+        id: Int,
+        isLiked: Boolean,
+        onSuccess: (Boolean) -> Unit,
+    ) {
+        onSuccess(goodLikeUseCase(id, isLiked))
     }
 }
 
