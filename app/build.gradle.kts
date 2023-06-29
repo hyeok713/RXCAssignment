@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release") {
+            storeFile = file("$rootDir\\keystore.jks")
+            storePassword = "111111"
+            keyAlias = "key0"
+            keyPassword = "111111"
+        }
+    }
     namespace = "com.hyeokbeom.rxcassignment"
     compileSdk = 33
 
@@ -25,13 +33,17 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+//        getByName("release") {
+//
+//        }
     }
     kapt {
         correctErrorTypes = true
