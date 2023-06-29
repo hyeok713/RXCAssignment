@@ -1,6 +1,7 @@
 # RXCAssignment
 RXC Android Engineer Position 코딩 과제 by 서혁범 <br />
 
+
 ## Development Environment
 - Android Studio Electric Eel | 2022.1.1 Patch 1
 - Compile Sdk Version: 33
@@ -8,9 +9,11 @@ RXC Android Engineer Position 코딩 과제 by 서혁범 <br />
 - Gradle Version 8.0
 - Language: Kotlin
 
+
 ## Application Version
 - minSdkVersion : 23
 - targetSdkVersion : 33
+
 
 ## Introduction
 1. Clean Architecture + MVVM structure 기반, UDA 개념 참조 하여 설계 되었음
@@ -19,6 +22,7 @@ RXC Android Engineer Position 코딩 과제 by 서혁범 <br />
 4. Light & Dark theme 호환
 5. release build 를 위한 .jks(keystore) 파일을 프로젝트 내 위치
 6. 로딩 상태 애니메이션 확인을 위해 리스트 호출시 임의로 지연 시간 두었음(3000ms)
+
 
 ## APIs
 ### Dagger
@@ -29,6 +33,7 @@ Dagger Hilt 는 DI 를 위한 Android Jetpack 의 권장 라이브러리이다. 
 
 ### Retrofit
 HTTP 통신을 할 때 많이 사용되는 Third-Party library. OkHttp 를 네트워크 레이어로 활용하여 그 위에 레이어를 한단계 더 추가해 만든 라이브러리 이다. 저수준 네트워크 명령을 OkHttp 에서 처리하고, 그 위 abstraction layer 를 구현해 간결하고 사용하기 편리함 <br />
+
 
 ## Preview
 ![open](https://github.com/hyeok713/RXCAssignment/assets/72484451/8b013986-546d-4e12-b7ca-791295c17418)
