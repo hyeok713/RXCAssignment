@@ -38,7 +38,7 @@ import com.hyeokbeom.shared.decimalFormat
 /**
  * NavigationArea
  * [상단 앱 바 영역]
- * - Title 및 Navigation Icon
+ * Title 및 Navigation Icon
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -82,80 +82,84 @@ fun GoodsArea(goods: List<GoodsListResponse.Good>) {
 /**
  * GoodView
  * [상품 영역]
+ * 버튼 클릭시 like 상태 변경
+ * 유저 action -> 서버 요청 (intent) 이후 처리된 결과를 통해 View Update
  * @param good 상품 정보
  */
 @Composable
-private fun GoodView(good: GoodsListResponse.Good, id: Int) =
-    with(good) {
-        val viewModel: MainViewModel = hiltViewModel()
-        var likedState by remember { mutableStateOf(good.isLike) }
+private fun GoodView(good: GoodsListResponse.Good, id: Int) = with(good) {
+    val viewModel: MainViewModel = hiltViewModel()
+    var likedState by remember { mutableStateOf(this.isLike) }
 
-        // SideEffect: Local likeState 변경 -> List Item 인 Good 의 isLike property 변경
-        LaunchedEffect(likedState) { good.isLike = likedState }
+    /* SideEffect: Local likeState 변경 -> List Item 인 Good 의 isLike property 변경 */
+    LaunchedEffect(likedState) { good.isLike = likedState }
 
-        Column(
-            modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            /* 상품 이미지 */
-            Box(modifier = Modifier.aspectRatio(1 / 1f)) {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = C_F7F7F7A100, shape = RoundedCornerShape(8.dp))
-                        .clip(shape = RoundedCornerShape(4.dp)),
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(good.thumbnailUrl)
-                        .crossfade(300)
-                        .build(),
-                    contentDescription = "Good Image",
-                )
+    Column(
+        modifier = Modifier.padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        /* 상품 이미지 */
+        Box(modifier = Modifier.aspectRatio(1 / 1f)) {
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = C_F7F7F7A100, shape = RoundedCornerShape(8.dp))
+                    .clip(shape = RoundedCornerShape(4.dp)),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(thumbnailUrl)
+                    .crossfade(300)
+                    .build(),
+                contentDescription = "Good Image",
+            )
 
-                /* 클릭 여부에 따라 아이콘 설정 */
-                IconButton(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(2.dp),
-                    onClick = {
-                        viewModel.requestLikeChange(id) // 데이터 변경: request to server
-                        likedState = !isLike            // 데이터 변경: local state 변경
+            /* 클릭 여부에 따라 아이콘 설정 */
+            IconButton(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(2.dp),
+                /* Action - Click */
+                onClick = {
+                    /* Intent - 좋아요 상태 변경 */
+                    viewModel.requestLikeChange(id, isLike) {
+                        likedState = it // 처리 결과를 바탕으로 상태 변경
                     }
-                ) {
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = if (likedState) R.drawable.ic_like_filled else R.drawable.ic_like),
-                        contentDescription = "Like Icon",
-                        tint = Color.Unspecified
-                    )
                 }
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Column(
-                modifier = Modifier.height(144.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                /* 상품 라벨 */
-                Text(
-                    text = name,
-                    style = TitleLabel.displayMedium,
-                    color = colorScheme.onBackground,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                /* 가격 라벨 */
-                PriceText(
-                    discountRate = discountRate,
-                    price = price,
-                    consumerPrice = consumerPrice
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    painter = painterResource(id = if (likedState) R.drawable.ic_like_filled else R.drawable.ic_like),
+                    contentDescription = "Like Icon",
+                    tint = Color.Unspecified
                 )
             }
         }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Column(
+            modifier = Modifier.height(144.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            /* 상품 라벨 */
+            Text(
+                text = name,
+                style = TitleLabel.displayMedium,
+                color = colorScheme.onBackground,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            /* 가격 라벨 */
+            PriceText(
+                discountRate = discountRate,
+                price = price,
+                consumerPrice = consumerPrice
+            )
+        }
     }
+}
 
 /**
  * PriceText
