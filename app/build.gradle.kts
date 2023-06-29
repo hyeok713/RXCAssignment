@@ -41,9 +41,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-//        getByName("release") {
-//
-//        }
     }
     kapt {
         correctErrorTypes = true
