@@ -30,7 +30,7 @@ Dagger Hilt 는 DI 를 위한 Android Jetpack 의 권장 라이브러리이다. 
 ### Retrofit
 HTTP 통신을 할 때 많이 사용되는 Third-Party library. OkHttp 를 네트워크 레이어로 활용하여 그 위에 레이어를 한단계 더 추가해 만든 라이브러리 이다. 저수준 네트워크 명령을 OkHttp 에서 처리하고, 그 위 abstraction layer 를 구현해 간결하고 사용하기 편리함 <br />
 
-### Preview
+## Preview
 ![open](https://github.com/hyeok713/RXCAssignment/assets/72484451/8b013986-546d-4e12-b7ca-791295c17418)
 ![dark](https://github.com/hyeok713/RXCAssignment/assets/72484451/a6245091-1c0e-489f-b0ba-efc4f06c807f)
 ![like](https://github.com/hyeok713/RXCAssignment/assets/72484451/af0080c2-c9d6-44d6-bbcf-9ab55cf85bf4)
