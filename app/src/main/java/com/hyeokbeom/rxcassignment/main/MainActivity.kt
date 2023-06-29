@@ -8,10 +8,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.hyeokbeom.domain.model.GoodsListResponse
 import com.hyeokbeom.rxcassignment.ui.anim.DotsFlashing
 import com.hyeokbeom.rxcassignment.ui.theme.RXCAssignmentTheme
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(color = Color.White)
+                            .background(color = MaterialTheme.colorScheme.background)
                     ) {
                         /* Top Navigation */
                         NavigationArea()

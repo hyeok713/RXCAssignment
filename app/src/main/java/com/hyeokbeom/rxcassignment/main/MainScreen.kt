@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.ArrowBack
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,7 +56,7 @@ fun NavigationArea() {
                 Icon(imageVector = Icons.Sharp.ArrowBack, contentDescription = "Back Button")
             }
         },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color.White)
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = colorScheme.background)
     )
 }
 
@@ -139,6 +140,7 @@ private fun GoodView(good: GoodsListResponse.Good, id: Int) =
                 Text(
                     text = name,
                     style = TitleLabel.displayMedium,
+                    color = colorScheme.onBackground,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -174,14 +176,16 @@ fun PriceText(
             Row {
                 Text(
                     text = "${discountRate.decimalFormat}%",
-                    style = PriceLabel.displayMedium.copy(color = C_DD3B3BA100)
+                    style = PriceLabel.displayMedium,
+                    color = C_DD3B3BA100,
                 )
 
                 Spacer(modifier = Modifier.width(6.dp))
 
                 Text(
                     text = price.decimalFormat + stringResource(id = R.string.won),
-                    style = PriceLabel.displayMedium
+                    style = PriceLabel.displayMedium,
+                    color = colorScheme.onBackground,
                 )
             }
 
@@ -189,13 +193,15 @@ fun PriceText(
 
             Text(
                 text = consumerPrice.decimalFormat + stringResource(id = R.string.won),
-                style = PriceLabel.displaySmall
+                style = PriceLabel.displaySmall,
+                color = colorScheme.onBackground,
             )
         }
     } else {
         Text(
             text = price.decimalFormat + stringResource(id = R.string.won),
-            style = PriceLabel.displayMedium
+            style = PriceLabel.displayMedium,
+            color = colorScheme.onBackground,
         )
     }
 }

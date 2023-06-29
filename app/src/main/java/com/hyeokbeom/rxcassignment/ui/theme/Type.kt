@@ -30,8 +30,7 @@ val TitleLabel = Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 15.sp,
-        textAlign = TextAlign.Center,
-        color = Color.Black,
+        textAlign = TextAlign.Center
     ),
 )
 
@@ -45,7 +44,6 @@ val PriceLabel = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 15.sp,
         textAlign = TextAlign.Center,
-        color = Color.Black
     ),
 
     // Consumer Price
@@ -54,6 +52,5 @@ val PriceLabel = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         textAlign = TextAlign.Center,
-        color = Color.Black.copy(alpha = 0.5f),
     ).merge(SpanStyle(textDecoration = TextDecoration.LineThrough))
 )

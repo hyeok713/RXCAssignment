@@ -17,15 +17,19 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color.Black,
+    background = Color.Black,
+    primary = Color.White,
     secondary = Color.Black,
-    tertiary = Color.Black
+    tertiary = Color.Black,
+    onBackground = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color.White,
+    background = Color.White,
+    primary = Color.Black,
     secondary = Color.White,
-    tertiary = Color.White
+    tertiary = Color.White,
+    onBackground = Color.Black
 )
 
 @Composable
@@ -48,7 +52,7 @@ fun RXCAssignmentTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = colorScheme.background.toArgb()
 
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
