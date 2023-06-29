@@ -7,5 +7,5 @@ import javax.inject.Inject
 class RXCRepositoryImpl @Inject constructor(
     private val api: RXCApi,
 ) : RXCRepository {
-    override suspend fun mainList() = api.mainList()
+    override suspend fun goodsList() = api.mainList()
 }

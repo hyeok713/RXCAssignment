@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RXCAssignment</string>
+    <string name="wishlist">위시리스트</string>
+    <string name="won">원</string>
+</resources>
