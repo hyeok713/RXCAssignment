@@ -101,7 +101,7 @@ private fun GoodView(good: GoodsListResponse.Good, id: Int) =
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = Color.Transparent, shape = RoundedCornerShape(8.dp))
+                        .background(color = C_F7F7F7A100, shape = RoundedCornerShape(8.dp))
                         .clip(shape = RoundedCornerShape(4.dp)),
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(good.thumbnailUrl)
