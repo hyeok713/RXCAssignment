@@ -1,4 +1,4 @@
-package com.hyeokbeom.rxcassignment
+package com.hyeokbeom.rxcassignment.main
 
 import androidx.lifecycle.ViewModel
 import com.hyeokbeom.domain.model.GoodsListResponse
@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
-import kotlin.reflect.KFunction0
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
